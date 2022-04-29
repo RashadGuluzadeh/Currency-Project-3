@@ -103,6 +103,12 @@ function convert(e){
   });
 }
 // ------------------------- Btn Select and get value -------------------------
+inputFrom.addEventListener("input", (e) => {
+  e.target.value = e.target.value.split(",").join(".")
+})
+inputTo.addEventListener("input", (e) => {
+  e.target.value = e.target.value.split(",").join(".")
+})
 
 function leftSelectedCurrency() {
   leftbtn.forEach((element, index) => {

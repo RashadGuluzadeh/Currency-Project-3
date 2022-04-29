@@ -1,25 +1,27 @@
 @media only screen and (min-width : 300px) and (max-width : 810px){
-    .converting-area{
+    .container .converting-area{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         height: 400px;
+        width: 423px;
     }
     .container h1{
-        font-size: 20px;
+        font-size: 27px;
         display: flex;
         align-items: center;
-        width: 433px;
-        justify-content: center;
+        width: 387px;
+        justify-content: flex-end;
     }
-    header .login{
-        display: none;
-    }
+    /* header .login{
+        position: absolute;
+        right: 55px;
+    } */
     header .bar{
-        position: fixed;
+        position: absolute;
         left: -100%;
-        top: 40px;
+        top: 60px;
         gap: 0;
         flex-direction: column;
         background-color: #f5f5f6;
@@ -27,11 +29,24 @@
         text-align: center;
         transition: .3s;
         font-size: 32px;
-        height: 100%;
+        height: 100vh;
+        row-gap: 18px;
+        overflow: auto;
+    }
+    header .bar li{
+        font-size: 16px;
+    }
+    .to{
+        margin-bottom: 15px;
+    }
+    .mobile{
+        display: flex;
+        column-gap: 30px;
     }
     header .bar.active{
         left: 0;
-    }
+        justify-content: flex-start;
+        }
     .hamburger{
         display: block;
     }
@@ -44,4 +59,6 @@
     .hamburger.active .hamb-bar:nth-child(3){
         transform: translateY(-8px) rotate(-45deg);
     }
+
+
 }

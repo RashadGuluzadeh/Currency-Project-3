@@ -46,20 +46,18 @@ header .bar {
 
 header .bar li {
   list-style-type: none;
-}
-
-header .bar li a {
-  text-decoration: none;
   font-size: 11px;
   color: #959ba4;
   font-weight: 500;
+  cursor: pointer;
 }
 
-header .bar li a.hov {
+
+header .bar li.hov {
   color: #000;
 }
 
-header .bar li a:hover {
+header .bar li:hover {
   color: #000;
 }
 .hamburger{
