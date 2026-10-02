@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* Dark mode is driven by <html data-theme="dark">, set in src/ui/theme.ts. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-brand-50: #f6f0fe;
+  --color-brand-100: #ede1fc;
+  --color-brand-200: #dcc4fa;
+  --color-brand-300: #c39bf5;
+  --color-brand-400: #a66bee;
+  --color-brand-500: #9150e6;
+  --color-brand-600: #833ae0;
+  --color-brand-700: #6d2bc2;
+  --color-brand-800: #5a259d;
+  --color-brand-900: #4a217f;
+  --color-brand-950: #2e0f56;
+
+  --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --animate-fade-up: fade-up 0.7s var(--ease-spring) both;
+  --animate-swap: swap 0.45s var(--ease-spring);
+  --animate-float: float 14s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+
+  @keyframes swap {
+    from {
+      transform: rotate(-180deg);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(30px, -20px) scale(1.06);
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+
+  input:focus-visible {
+    outline: none;
+  }
+
+  button:not(:disabled),
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  /* Currency pill in the picker. */
+  .chip {
+    @apply inline-flex h-8 items-center justify-center rounded-full px-3.5 text-xs font-semibold tracking-wide
+      text-slate-600 ring-1 ring-slate-200 bg-white transition duration-200
+      hover:text-brand-700 hover:ring-brand-300 hover:bg-brand-50
+      disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-slate-600 disabled:hover:ring-slate-200
+      dark:bg-white/5 dark:text-slate-300 dark:ring-white/10
+      dark:hover:bg-brand-500/15 dark:hover:text-brand-200 dark:hover:ring-brand-400/40;
+  }
+
+  .chip[aria-pressed="true"],
+  .chip.is-active {
+    @apply bg-brand-600 text-white ring-brand-600 shadow-md shadow-brand-600/30
+      hover:bg-brand-600 hover:text-white
+      dark:bg-brand-500 dark:ring-brand-500 dark:hover:bg-brand-500 dark:hover:text-white;
+  }
+
+  /* Native <select> styled as a pill with a CSS-only chevron (no external images => CSP friendly). */
+  .chip-select {
+    @apply w-28 appearance-none truncate pr-7;
+    background-image:
+      linear-gradient(45deg, transparent 50%, currentColor 50%),
+      linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position:
+      calc(100% - 15px) 52%,
+      calc(100% - 11px) 52%;
+    background-size: 4px 4px;
+    background-repeat: no-repeat;
+  }
+
+  .chip-select option {
+    @apply bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100;
+  }
+
+  /* Faint grid behind the hero, faded out at the edges. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(131 58 224 / 7%) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(131 58 224 / 7%) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 40%, transparent 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
