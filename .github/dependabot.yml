@@ -1,13 +1,26 @@
 version: 2
 updates:
+  # npm packages: one grouped PR per week instead of one PR per package.
+  # Security fixes still arrive immediately as their own PRs.
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 3
     groups:
-      dev-dependencies:
-        dependency-type: development
+      npm-dependencies:
+        patterns: ["*"]
+        update-types: [minor, patch]
+    commit-message:
+      prefix: "deps"
+
+  # GitHub Actions: every action bump in a single monthly PR.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "ci"
